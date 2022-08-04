@@ -1,21 +1,21 @@
-const api_url = "https://thisisyourstore.herokuapp.com";
+const api_url = "https://api-users-mudassarkhopatkar.herokuapp.com";
 async function getProducts(url) {
-  const response = await fetch(url + "/" + "products", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
-  if (data.length === 0) {
-    alert("Table Users is empty");
-  } else {
-    showProducts(data);
-  }
+	const response = await fetch(url + "/" + "products", {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+	const data = await response.json();
+	if (data.length === 0) {
+		alert("Table Users is empty");
+	} else {
+		showProducts(data);
+	}
 }
 
 function showProducts(data) {
-  let table = `<tr>
+	let table = `<tr>
                 <th>sku</th>
                 <th>name</th>
                 <th>price</th>
@@ -27,8 +27,8 @@ function showProducts(data) {
                 <th>create_date</th>
                 <th>stock</th>
                 </tr>`;
-  for (let p of data) {
-    table += `<tr>
+	for (let p of data) {
+		table += `<tr>
                 <td>${p.sku}</td>
                 <td>${p.name}</td>
                 <td>${p.price}</td>
@@ -40,8 +40,8 @@ function showProducts(data) {
                 <td>${p.create_date}</td>
                 <td>${p.stock}</td>
                 <tr>`;
-  }
-  document.getElementById("products").innerHTML = table;
+	}
+	document.getElementById("products").innerHTML = table;
 }
 
 getProducts(url);

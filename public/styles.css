@@ -1,7 +1,9 @@
 body {
-	background-color: rgba(45, 41, 45, 0.619);
+	color: white;
+	background-color: black;
 }
 #navlinks {
+	color: white;
 	display: flex;
 	justify-content: space-around;
 	align-content: center;
@@ -18,8 +20,33 @@ body {
 }
 
 .loginForm {
+	margin-top: 10%;
+	margin-left: 25%;
+	color: white;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	background-color: aliceblue;
+	width: 50%;
+}
+form {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+input {
+	margin-bottom: 20px;
+}
+.button {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+.button button {
+	gap: 20px;
 }
