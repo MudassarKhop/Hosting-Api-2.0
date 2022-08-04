@@ -1,17 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="./scripts/users.js"></script>
-  </head>
-  <body>
-    <div>
-      <table id="users"></table>
-    </div>
-  </body>
-</html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./styles.css" />
+		<title>Document</title>
+	</head>
+	<body>
+		<nav>
+			<div id="navlinks">
+				<a href="./login.html"> LOGIN</a>
+				<a href="./register.html">REGISTER</a>
+				<a href="./users.html"> USERS</a>
+				<a href="./products.html">PRODUCTS</a>
+			</div>
+		</nav>
+		<div>
+			<table id="users"></table>
+		</div>
 
-<script></script>
+		<script>
+			const api_url = "https://api-users-mudassarkhopatkar.herokuapp.com";
+			//SHOW USERS
+			async function getUsers(url) {
+				const response = await fetch(url + "/" + "users", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				});
+
+				const data = await response.json();
+				if (data.length === 0) {
+					alert("Table Users is empty");
+				} else {
+					show(data);
+				}
+			}
+
+			getUsers(api_url);
+
+			function show(data) {
+				let table = `<tr>
+                <th>full_name</th>
+                <th>password</th>
+                <th>email</th>
+                <th>billing_address</th>
+                <th>default_shipping_address</th>
+                <th>country</th>
+                <th>phone</th>
+                <th>user_type</th>
+                </tr>`;
+				for (let r of data) {
+					table += ` <tr>
+                    <td> ${r.full_name}</td>
+                    <td> ${r.password}</td>
+                    <td> ${r.email}</td>
+                    <td> ${r.billing_address}</td>
+                    <td> ${r.default_shipping_address}</td>
+                    <td> ${r.country}</td>
+                    <td> ${r.phone}</td>
+                    <td> ${r.user_type}</td>
+                    </tr>`;
+				}
+				document.getElementById("users").innerHTML = table;
+			}
+
+			async function getSingleUser(url) {
+				const response = await fetch(url + "/" + "users" + "/:id", {
+					method: "GET",
+					headers: {
+						"x-auth-token": "${token}",
+					}
+						.then((response) => response.json())
+						.then((data) => {
+							user = data;
+						})
+						.catch((error) => {
+							console.error("Error:", error);
+						}),
+				});
+				getSingleUser(api_url);
+			}
+		</script>
+	</body>
+</html>

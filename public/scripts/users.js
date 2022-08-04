@@ -3,23 +3,23 @@ const api_url = "http://localhost:6969";
 // let user = JSON.parse(window.localStorage(getItem("user")));
 
 async function getUsers(url) {
-  const response = await fetch(url + "/" + "users", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+	const response = await fetch(url + "/" + "users", {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
 
-  const data = await response.json();
-  if (data.length === 0) {
-    alert("Table Users is empty");
-  } else {
-    show(data);
-  }
+	const data = await response.json();
+	if (data.length === 0) {
+		alert("Table Users is empty");
+	} else {
+		show(data);
+	}
 }
 
 function show(data) {
-  let table = `<tr>
+	let table = `<tr>
                 <th>full_name</th>
                 <th>password</th>
                 <th>email</th>
@@ -29,8 +29,8 @@ function show(data) {
                 <th>phone</th>
                 <th>user_type</th>
                 </tr>`;
-  for (let r of data) {
-    table += ` <tr>
+	for (let r of data) {
+		table += ` <tr>
                     <td> ${r.full_name}</td>
                     <td> ${r.password}</td>
                     <td> ${r.email}</td>
@@ -40,8 +40,8 @@ function show(data) {
                     <td> ${r.phone}</td>
                     <td> ${r.user_type}</td>
                     </tr>`;
-  }
-  document.getElementById("users").innerHTML = table;
+	}
+	document.getElementById("users").innerHTML = table;
 }
 
 getUsers(api_url);
@@ -49,19 +49,19 @@ getUsers(api_url);
 // GET SINGLE USER
 
 async function getSingleUser(url) {
-  const response = await fetch(url + "/" + "users" + "/:id", {
-    method: "GET",
-    headers: {
-      "x-auth-token": "${token}",
-    }
-      .then((response) => response.json())
-      .then((data) => {
-        user = data;
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      }),
-  });
+	const response = await fetch(url + "/" + "users" + "/:id", {
+		method: "GET",
+		headers: {
+			"x-auth-token": "${token}",
+		}
+			.then((response) => response.json())
+			.then((data) => {
+				user = data;
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+			}),
+	});
 }
 
 getSingleUser(api_url);
